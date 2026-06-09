@@ -1,0 +1,11 @@
+*.db
+*.db-shm
+*.db-wal
+backend/build/
+frontend/dist/
+frontend/node_modules/
+.env
+.DS_Store
+.vscode/settings.json
+*.suo
+*.user

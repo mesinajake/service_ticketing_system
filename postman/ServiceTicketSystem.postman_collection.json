@@ -1,0 +1,105 @@
+{
+  "info": {
+    "name": "Service Ticket System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "Health",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/health",
+            "description": "Returns backend health status."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tickets",
+      "item": [
+        { "name": "Get Tickets", "request": { "method": "GET", "url": "{{baseUrl}}/api/tickets?search=&status=&priority=&category=" } },
+        { "name": "Get Ticket", "request": { "method": "GET", "url": "{{baseUrl}}/api/tickets/1" } },
+        {
+          "name": "Create Ticket",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/api/tickets",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\":\"Cannot access email\",\"description\":\"Mailbox login fails.\",\"requester_name\":\"Demo User\",\"requester_email\":\"demo@example.com\",\"category\":\"Account Access\",\"priority\":\"High\",\"status\":\"Open\",\"assigned_engineer_id\":1,\"resolution_notes\":null}"
+            }
+          }
+        },
+        {
+          "name": "Update Ticket",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/api/tickets/1",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\":\"Cannot access VPN\",\"description\":\"Updated details\",\"requester_name\":\"Liam Chen\",\"requester_email\":\"liam.chen@example.com\",\"category\":\"Network Issue\",\"priority\":\"High\",\"status\":\"In Progress\",\"assigned_engineer_id\":2,\"resolution_notes\":null}"
+            }
+          }
+        },
+        { "name": "Delete Ticket", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/tickets/1" } },
+        {
+          "name": "Update Ticket Status",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/api/tickets/1/status",
+            "body": { "mode": "raw", "raw": "{\"status\":\"Resolved\"}" }
+          }
+        },
+        {
+          "name": "Assign Ticket",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/api/tickets/1/assign",
+            "body": { "mode": "raw", "raw": "{\"engineer_id\":2}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Engineers",
+      "item": [
+        { "name": "Get Engineers", "request": { "method": "GET", "url": "{{baseUrl}}/api/engineers" } },
+        { "name": "Get Engineer", "request": { "method": "GET", "url": "{{baseUrl}}/api/engineers/1" } },
+        {
+          "name": "Create Engineer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/api/engineers",
+            "body": { "mode": "raw", "raw": "{\"full_name\":\"Jordan Kim\",\"email\":\"jordan@example.com\",\"role\":\"Junior Engineer\",\"department\":\"IT Support\"}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Logs",
+      "item": [
+        { "name": "Get Logs", "request": { "method": "GET", "url": "{{baseUrl}}/api/logs" } },
+        { "name": "Get Ticket Logs", "request": { "method": "GET", "url": "{{baseUrl}}/api/tickets/1/logs" } }
+      ]
+    },
+    {
+      "name": "Reports",
+      "item": [
+        { "name": "Summary", "request": { "method": "GET", "url": "{{baseUrl}}/api/reports/summary" } },
+        { "name": "By Status", "request": { "method": "GET", "url": "{{baseUrl}}/api/reports/status" } },
+        { "name": "By Priority", "request": { "method": "GET", "url": "{{baseUrl}}/api/reports/priority" } },
+        { "name": "By Category", "request": { "method": "GET", "url": "{{baseUrl}}/api/reports/category" } },
+        { "name": "By Engineer", "request": { "method": "GET", "url": "{{baseUrl}}/api/reports/engineers" } }
+      ]
+    }
+  ],
+  "variable": [{ "key": "baseUrl", "value": "http://localhost:8080" }]
+}

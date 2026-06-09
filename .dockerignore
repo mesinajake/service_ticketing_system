@@ -1,0 +1,6 @@
+.git
+.qodo
+backend/build
+backend/data/*.db
+frontend/dist
+frontend/node_modules
